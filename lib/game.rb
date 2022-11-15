@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'input'
 require_relative 'display'
+require_relative 'input'
 require_relative 'player'
+require_relative 'cage'
+require_relative 'game'
 
 # Class for the game itself. Central connector of all other classes
 class Game
@@ -29,12 +31,14 @@ class Game
   end
 
   def create_player(num, symbol)
-    player_name = player_name_input(num)
+    puts display_user_name_prompt(player_num)
+    player_name = player_name_input(num).capitalize
     Player.new(player_name, symbol)
   end
 
   def create_cage
-    cage_size = cage_size_input
+    puts display_cage_size_prompt
+    cage_size = cage_size_input.to_i
     @cage = Cage.new((cage_size))
   end
 end
