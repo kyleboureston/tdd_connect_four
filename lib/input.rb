@@ -15,4 +15,13 @@ module Input
     puts display_user_name_warning
     player_name_input(player_num)
   end
+
+  def cage_size_input
+    puts display_cage_size_prompt
+    cage_size = gets.chomp.to_i
+    return cage_size.to_i if cage_size.between?(5, 15)
+
+    puts display_cage_size_warning
+    cage_size_input
+  end
 end
