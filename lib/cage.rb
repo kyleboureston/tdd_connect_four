@@ -16,6 +16,8 @@ class Cage
       puts display_blank_line
     end
     puts display_bottom(final)
+    print_cols(final)
+    puts display_blank_line
   end
 
   def update(col)
@@ -23,6 +25,12 @@ class Cage
   end
 
   private
+
+  def print_cols(final_col)
+    print '  '
+    [*1..final_col].each { |col| print "#{col} " }
+    puts display_blank_line
+  end
 
   def print_cell(cell, index, final)
     if index.zero?
@@ -35,11 +43,11 @@ class Cage
   end
 
   def display_top(final)
-    '┌' + ('─' * ((final * 2)+ 1)) + '┐'
+    '┌' + ('─' * ((final * 2) + 1)) + '┐'
   end
 
   def display_bottom(final)
-    '└' + ('─' * ((final * 2)+ 1)) + '┘'
+    '└─' + ('┬─' * final) + '┘'
   end
 
   def display_blank_line; end
