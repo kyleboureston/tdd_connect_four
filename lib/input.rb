@@ -17,6 +17,14 @@ module Input
     player_name_input
   end
 
+  def player_color_input(colors)
+    player_color = gets.chomp
+    return player_color.downcase if colors.include?(player_color.downcase)
+
+    puts display_player_color_warning(colors)
+    player_color_input(colors)
+  end
+
   def cage_size_input
     size_input = gets.to_i
     return size_input if size_input.between?(5, 9)
@@ -31,13 +39,5 @@ module Input
 
     puts display_turn_warning(min_col, max_col)
     player_turn_input(min_col, max_col)
-  end
-
-  def player_color_input(colors)
-    player_color = gets.chomp
-    return player_color.downcase if colors.include?(player_color.downcase)
-
-    puts display_player_color_warning(colors)
-    player_color_input(colors)
   end
 end
