@@ -2,10 +2,10 @@
 
 # Player class
 class Player
-  attr_reader :name, :symbol
+  attr_reader :name, :token
 
-  def initialize(name, symbol)
+  def initialize(name, token)
     @name = name
-    @symbol = symbol
+    @token = token
   end
 end

@@ -9,19 +9,35 @@ module Input
     include Display
   end
 
-  def player_name_input(player_num)
-    player_name = gets.chomp
-    return player_name if player_name.match(/^[A-Za-z]+$/)
+  def player_name_input
+    name_input = gets.chomp
+    return name_input if name_input.match(/^[A-Za-z]+$/)
 
-    puts display_user_name_warning
-    player_name_input(player_num)
+    puts display_player_name_warning
+    player_name_input
   end
 
   def cage_size_input
-    cage_size = gets.chomp
-    return cage_size if cage_size.between?(5, 15)
+    size_input = gets.to_i
+    return size_input if size_input.between?(5, 9)
 
     puts display_cage_size_warning
     cage_size_input
+  end
+
+  def player_turn_input(min_col, max_col)
+    column_input = gets.to_i
+    return column_input if column_input.between?(min_col, max_col)
+
+    puts display_turn_warning(min_col, max_col)
+    player_turn_input(min_col, max_col)
+  end
+
+  def player_color_input(colors)
+    player_color = gets.chomp
+    return player_color.downcase if colors.include?(player_color.downcase)
+
+    puts display_player_color_warning(colors)
+    player_color_input(colors)
   end
 end

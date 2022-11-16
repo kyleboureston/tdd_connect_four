@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'colors'
 require_relative 'display'
 require_relative 'input'
 require_relative 'player'
