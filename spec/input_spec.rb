@@ -11,12 +11,11 @@ describe Input do
     describe 'when user inputs valid_name' do
       it 'returns player_name' do
         # Arrange
-        player_num = 1
         valid_name = 'geo'
         allow(dummy).to receive(:puts)
         allow(dummy).to receive(:gets).and_return(valid_name)
         # Act
-        player_name = dummy.player_name_input(player_num)
+        player_name = dummy.player_name_input
         # Assert
         expect(player_name).to eq(valid_name)
       end
@@ -25,16 +24,45 @@ describe Input do
     describe 'when user inputs invalid_name once, then valid_name' do
       it 'displays error message, requests new input, then returns valid name' do
         # Arrange
-        player_num = 1
         invalid_name = '1ste1'
         valid_name = 'Geo'
         allow(dummy).to receive(:puts)
         allow(dummy).to receive(:gets).and_return(invalid_name, valid_name)
-        error_message = 'Try again. Please enter your name using letters only.'
         # Assert
-        expect(dummy).to receive(:puts).with(error_message).once
+        expect(dummy).to receive(:puts).once
         # Act
-        dummy.player_name_input(player_num)
+        dummy.player_name_input
+      end
+    end
+  end
+
+  describe '#player_color_input' do
+    describe 'when user inputs valid_color' do
+      it 'returns player_color' do
+        # Arrange
+        colors = ['white', 'grey', 'red']
+        valid_color = 'white'
+        allow(dummy).to receive(:puts)
+        allow(dummy).to receive(:gets).and_return(valid_color)
+        # Act
+        player_color = dummy.player_color_input(colors)
+        # Assert
+        expect(player_color).to eq(valid_color)
+      end
+    end
+
+    describe 'when user inputs invalid_color once, then valid_color' do
+      it 'displays error message, requests new input, then returns valid name' do
+        # Arrange
+        colors = ['white', 'grey', 'red']
+        invalid_color = 'greige'
+        valid_color = 'grey'
+        allow(dummy).to receive(:puts)
+        allow(dummy).to receive(:gets).and_return(invalid_color, valid_color)
+        # Assert
+        expect(dummy).to receive(:puts).once
+        # Act
+        dummy.player_color_input(you)
       end
     end
   end
@@ -59,9 +87,8 @@ describe Input do
         low_number = 1
         high_number = 200
         allow(dummy).to receive(:gets).and_return(low_number, high_number, valid_number)
-        error_message = 'Try again. Please enter a number between 5 and 9.'
         # Assert
-        expect(dummy).to receive(:puts).with(error_message).twice
+        expect(dummy).to receive(:puts).twice
         # Act
         dummy.cage_size_input
       end

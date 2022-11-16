@@ -13,13 +13,20 @@ describe Game do
       it 'sends message :new to Player with the correct arguments' do
         # Arrange
         num = 1
-        symbol = 'white'
+
         valid_name = 'Geo'
+        allow(game).to receive(:clear_screen)
+        allow(game).to receive(:puts)
         allow(game).to receive(:player_name_input).and_return(valid_name)
+
+        valid_color = 'white'
+        allow(game).to receive(:clear_screen)
+        allow(game).to receive(:puts)
+        allow(game).to receive(:player_color_input).and_return(valid_color)
         # Assert
-        expect(Player).to receive(:new).with(valid_name, symbol)
+        expect(Player).to receive(:new).with(valid_name, valid_color)
         # Act
-        game.create_player(num, symbol)
+        game.create_player(num)
       end
     end
   end
@@ -29,6 +36,8 @@ describe Game do
       it 'sends message :new to Cage with the correct arguments' do
         # Arrange
         valid_cage_size = 200
+        allow(game).to receive(:clear_screen)
+        allow(game).to receive(:puts)
         allow(game).to receive(:cage_size_input).and_return(valid_cage_size)
         # Assert
         expect(Cage).to receive(:new).with(valid_cage_size)
