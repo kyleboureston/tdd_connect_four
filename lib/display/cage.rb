@@ -3,12 +3,12 @@
 module Display
   # Mixin for all messages displayed to the user
   module Cage
-    def display_top(final_col)
-      '┌' + ('─' * ((final_col * 2) + 1)) + '┐'
+    def print_top(final_col)
+      puts '┌' + ('─' * ((final_col * 2) + 1)) + '┐'
     end
 
-    def display_bottom(final_col)
-      '└─' + ('┬─' * final_col) + '┘'
+    def print_bottom(final_col)
+      puts '└─' + ('┬─' * final_col) + '┘'
     end
 
     def print_spacer1
@@ -23,7 +23,14 @@ module Display
       print '  '
       [*1..final_col].each { |col| print "#{col} " }
     end
-  
+
+    def print_cells(cage)
+      cage.each do |row|
+        row.each_with_index { |circle, index| print_circle(circle, index, final_col) }
+        print_spacer1
+      end
+    end
+
     def print_circle(circle, index, final_col)
       if index.zero?
         print '│ ' + color(circle) + ' '
