@@ -62,7 +62,7 @@ describe Input do
         # Assert
         expect(dummy).to receive(:puts).once
         # Act
-        dummy.player_color_input(you)
+        dummy.player_color_input(colors)
       end
     end
   end
@@ -80,7 +80,7 @@ describe Input do
       end
     end
 
-    describe 'when user inputs two incorrect value, then a valid input' do
+    describe 'when user inputs two incorrect values, then a valid input' do
       it 'return the number and display error message twice' do
         # Arrange
         valid_number = 6
@@ -91,6 +91,36 @@ describe Input do
         expect(dummy).to receive(:puts).twice
         # Act
         dummy.cage_size_input
+      end
+    end
+  end
+
+  describe '#player_turn_input' do
+    describe 'when user input is a valid column' do
+      it '@cage arr gains new piece in correct column' do
+        # Arrange
+        valid_number = 6
+        allow(dummy).to receive(:gets).and_return(valid_number)
+        # Act
+        valid_input = dummy.cage_size_input
+        # Assert
+        expect(valid_input).to eq(valid_number)
+      end
+    end
+
+    describe 'when user inputs two incorrect values, then a valid input' do
+      it 'return the updated board and display error message twice' do
+        # Arrange
+        min_col = 1
+        max_col = 9
+        valid_number = 6
+        low_number = 0
+        high_number = 200
+        allow(dummy).to receive(:gets).and_return(low_number, high_number, valid_number)
+        # Assert
+        expect(dummy).to receive(:puts).twice
+        # Act
+        dummy.player_turn_input(min_col, max_col)
       end
     end
   end
