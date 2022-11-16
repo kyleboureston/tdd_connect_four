@@ -24,24 +24,24 @@ module Display
       [*1..final_col].each { |col| print "#{col} " }
     end
 
-    def print_cells(cage)
+    def print_circles(cage, final_col)
       cage.each do |row|
-        row.each_with_index { |circle, index| print_circle(circle, index, final_col) }
+        row.each_with_index { |color, index| print_circle(color, index, final_col) }
         print_spacer1
       end
     end
 
-    def print_circle(circle, index, final_col)
+    def print_circle(color, index, final_col)
       if index.zero?
-        print '│ ' + color(circle) + ' '
+        print "│ #{get_color(color)} "
       elsif index == (final_col - 1)
-        print color(circle) + ' │'
+        print "#{get_color(color)} │"
       else
-        print color(circle) + ' '
+        print "#{get_color(color)} "
       end
     end
 
-    def color(color = 'empty')
+    def get_color(color = 'empty')
       {
         'empty' => "\u25CB",
         'red' => "\u25CF".red,
