@@ -20,7 +20,7 @@ module Display
     end
 
     def print_turn_request(player_name, player_color, min_col, max_col)
-      message = "#{player_name} what column do you want to drop your piece? Select a column between #{min_col} and #{max_col}."
+      message = "#{player_name} what column do you want to drop your piece? Enter a column between #{min_col} and #{max_col}."
       puts add_bg_color(player_color, message)
     end
 
