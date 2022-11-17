@@ -8,5 +8,4 @@ require_relative 'player'
 require_relative 'cage'
 require_relative 'game'
 
-game = Game.new
-game.play
+Game.new.play
