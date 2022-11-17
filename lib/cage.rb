@@ -5,10 +5,10 @@ require_relative 'display/cage'
 # Class to create the cage/board to drop the pieces
 class Cage
   include Display::Cage
-  attr_reader :cage, :blank_cell, :min_col, :max_col, :conclusion
+  attr_reader :arr, :blank_cell, :min_col, :max_col, :conclusion
 
-  def initialize(cage_size)
-    @cage       = Array.new(cage_size) { Array.new(cage_size) { 'empty' } }
+  def initialize(cage_size, arr = Array.new(cage_size) { Array.new(cage_size) { 'empty' } })
+    @arr        = arr
     @min_col    = 1
     @max_col    = cage_size
     @conclusion = nil
@@ -16,16 +16,16 @@ class Cage
 
   def display
     clear_screen
-    final_col = cage.length
+    final_col = @arr.length
 
     print_top(final_col)
-    print_circles(@cage, final_col)
+    print_circles(@arr, final_col)
     print_bottom(final_col)
     print_col_nums(final_col)
     print_spacer2
   end
 
-  def update(player_color, col, arr = @cage.reverse)
+  def update(player_color, col, arr = @arr.reverse)
     counter = 0
     arr.map! do |row|
       break if counter == 1
@@ -45,7 +45,7 @@ class Cage
   end
 
   def full?
-    total_blank_cells = @cage.flatten.count('empty')
+    total_blank_cells = @arr.flatten.count('empty')
     if total_blank_cells.zero?
       @conclusion = 'board_full'
       true
@@ -65,7 +65,7 @@ class Cage
 
   private
 
-  def row_winner?(player_color, arr = @cage.reverse)
+  def row_winner?(player_color, arr = @arr.reverse)
     count = 0
     arr.each do |row|
       break if count == 4
@@ -79,7 +79,7 @@ class Cage
     count == 4
   end
 
-  def col_winner?(player_color, arr = @cage.reverse)
+  def col_winner?(player_color, arr = @arr.reverse)
     cols_as_rows = convert_cols_to_rows(arr)
     row_winner?(player_color, cols_as_rows)
   end
@@ -94,7 +94,7 @@ class Cage
     response
   end
 
-  def diagonal_winner?(player_color, arr = @cage.reverse)
+  def diagonal_winner?(player_color, arr = @arr.reverse)
     response = false
     coordinates = coordinates_of_players_color(player_color, arr)
     return if coordinates.length <= 3
