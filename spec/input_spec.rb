@@ -5,7 +5,7 @@ require_relative 'spec_helper'
 
 # Help with rspec and modules: https://mixandgo.com/learn/ruby/module-testing-with-rspec
 describe Input do
-  let(:dummy) { Class.new { extend Input, Display } }
+  let(:dummy) { Class.new { extend Input, Display, Display::Messages } }
 
   describe '#player_name_input' do
     describe 'when user inputs valid_name' do
