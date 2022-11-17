@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require_relative 'display'
+require_relative 'display/messages'
 
 # Mixin for all inputs requested from user
 module Input
   # Include the 'display' module to this module
   def self.-(_base)
-    include Display
+    include Display::Messages
   end
 
   def player_name_input
