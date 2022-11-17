@@ -11,7 +11,8 @@ require_relative 'game'
 class Game
   include Input
   include Display::Messages
-  attr_reader :cage, :player1, :player2, :current_player
+  attr_reader :cage
+  attr_accessor :player1, :player2, :current_player
 
   def initialize
     @cage           = nil

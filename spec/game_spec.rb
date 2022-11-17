@@ -46,4 +46,34 @@ describe Game do
       end
     end
   end
+
+  describe '#switch_current_player' do
+    context 'when method is run' do
+      subject(:original_player) { Player.new('original_player', 'red') } # (player_name, player_color)
+      subject(:next_player) { Player.new('next_player', 'blue') }
+      it 'changes the @current_player to the next player' do
+        # Arrange
+        game.player1 = original_player
+        game.player2 = next_player
+        game.current_player = original_player
+        original_current_player = game.current_player
+        # Act
+        current_player = game.switch_current_player
+        # Assert
+        expect(original_current_player).not_to eq(current_player)
+      end
+
+      it '@current_player remains a Player class object' do
+        # Arrange
+        game.player1 = original_player
+        game.player2 = next_player
+        game.current_player = original_player
+        original_current_player = game.current_player
+        # Act
+        current_player = game.switch_current_player
+        # Assert
+        expect(current_player.class).to eq(Player)
+      end
+    end
+  end
 end
