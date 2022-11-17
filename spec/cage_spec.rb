@@ -43,7 +43,7 @@ describe Cage do
         expect(cage_is_full).to be true
       end
 
-      it "@conclusion is updated to 'board_full'" do
+      it "@conclusion is changed to 'board_full'" do
         # Arrange
         # Act
         full_cage.full?
@@ -66,11 +66,132 @@ describe Cage do
 
       it "@conclusion is not changed'" do
         # Arrange
-        original_conclusion = not_full_cage.instance_variable_get(:@guess_count)
+        original_conclusion = not_full_cage.instance_variable_get(:@conclusion)
         # Act
         not_full_cage.full?
         # Assert
         expect(not_full_cage.conclusion).to eq(original_conclusion)
+      end
+    end
+  end
+
+  player_name = 'Mr Player'
+  player_color = 'red'
+  subject(:dummy_player) { Player.new(player_name, player_color) }
+
+  describe '#winner?' do
+    describe 'when there is a NO winner' do
+      # NOTE: if you have a winning col or a winning diagonal, that will skew the test
+      cage_size = 5
+      arr = [['red', ''   , '', '', ''   ],
+              ['red', ''   , '', '', ''   ],
+              [''   , 'red', '', '', 'red'],
+              [''   , 'red', '', '', ''   ],
+              [''   , ''   , '', '', 'red']
+            ]
+      subject(:cage_no_winning_col) { Cage.new(cage_size, arr) }
+
+      it 'returns false' do
+        # Arrange
+        # Act
+        cage_has_no_winning_col = cage_no_winning_col.winner?(dummy_player)
+        # Assert
+        expect(cage_has_no_winning_col).to be false
+      end
+
+      it '@conclusion is not changed' do
+        # Arrange
+        original_conclusion = cage_no_winning_col.instance_variable_get(:@conclusion)
+        # Act
+        cage_no_winning_col.winner?(dummy_player)
+        # Assert
+        expect(cage_no_winning_col.conclusion).to eq(original_conclusion)
+      end
+    end
+
+    # NOTE: if you have a winning col or diagonal, that will skew the test
+    describe 'when there is a winner' do
+      context 'and it is a winning row' do
+        cage_size = 5
+        arr = [['red', ''   , ''   , ''   , ''   ],
+               ['red', ''   , ''   , ''   , ''   ],
+               [''   , 'red', 'red', 'red', 'red'], # this is the winning row for red
+               [''   , 'red', ''   , ''   , ''   ],
+               [''   , ''   , ''   , ''   , 'red']
+              ]
+        subject(:cage_winning_row) { Cage.new(cage_size, arr) }
+
+        it 'returns true' do
+          # Arrange
+          # Act
+          cage_has_winning_row = cage_winning_row.winner?(dummy_player)
+          # Assert
+          expect(cage_has_winning_row).to be true
+        end
+
+        it '@conclusion is changed to a Player class object' do
+          # Arrange
+          # Act
+          cage_winning_row.winner?(dummy_player)
+          # Assert
+          expect(cage_winning_row.conclusion.class).to eq(Player)
+        end
+      end
+
+      # NOTE: if you have a winning col or diagonol, that will skew the test
+      context 'and it is a winning column' do
+        cage_size = 5
+        arr = [['red', '', ''   , '', ''   ],
+               ['red', '', ''   , '', ''   ],
+               ['red', '', 'red', '', 'red'],
+               ['red', '', ''   , '', ''   ],
+               [''   , '', ''   , '', 'red']
+              ]
+        subject(:cage_winning_col) { Cage.new(cage_size, arr) }
+
+        it 'returns true' do
+          # Arrange
+          # Act
+          cage_has_winning_row = cage_winning_col.winner?(dummy_player)
+          # Assert
+          expect(cage_has_winning_row).to be true
+        end
+
+        it '@conclusion is changed to a Player class object' do
+          # Arrange
+          # Act
+          cage_winning_col.winner?(dummy_player)
+          # Assert
+          expect(cage_winning_col.conclusion.class).to eq(Player)
+        end
+      end
+
+    # NOTE: if you have a winning row or col, that will skew the test
+      context 'and it is a winning diagonol' do
+        cage_size = 5
+        arr = [['red', ''   , ''   , ''   , ''   ],
+               [''   , 'red', ''   , ''   , ''   ],
+               [''   , ''   , 'red', ''   , 'red'],
+               ['red', ''   , ''   , 'red', ''   ],
+               [''   , ''   , ''   , ''   , ''   ]
+              ]
+        subject(:cage_winning_diagonol) { Cage.new(cage_size, arr) }
+
+        it 'returns true' do
+          # Arrange
+          # Act
+          cage_has_winning_diagonol = cage_winning_diagonol.winner?(dummy_player)
+          # Assert
+          expect(cage_has_winning_diagonol).to be true
+        end
+
+        it '@conclusion is changed to a Player class object' do
+          # Arrange
+          # Act
+          cage_winning_diagonol.winner?(dummy_player)
+          # Assert
+          expect(cage_winning_diagonol.conclusion.class).to eq(Player)
+        end
       end
     end
   end
