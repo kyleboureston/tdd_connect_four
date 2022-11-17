@@ -81,7 +81,7 @@ describe Input do
     end
 
     describe 'when user inputs two incorrect values, then a valid input' do
-      it 'return the number and display error message twice' do
+      it 'returns the number and display error message twice' do
         # Arrange
         valid_number = 6
         low_number = 1
@@ -97,7 +97,7 @@ describe Input do
 
   describe '#player_turn_input' do
     describe 'when user input is a valid column' do
-      it '@cage arr gains new piece in correct column' do
+      it 'returns the column' do
         # Arrange
         valid_number = 6
         allow(dummy).to receive(:gets).and_return(valid_number)
