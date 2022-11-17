@@ -18,6 +18,7 @@ class Game
     @player1        = nil
     @player2        = nil
     @current_player = nil
+    @conclusion     = nil
     @colors         = ['red', 'green', 'yellow', 'purple', 'pink', 'blue', 'white']
   end
 
@@ -27,7 +28,7 @@ class Game
     cage.display
     @current_player = @player1
     play_turn until game_over?
-    conclusion
+    conclusion(@cage.conclusion)
   end
 
   def create_players
@@ -55,11 +56,12 @@ class Game
   end
 
   def play_turn
+    # start with switch_player so that we run game_over? with current_player
+    switch_current_player
     print_turn_request(@current_player.name, @current_player.color, @cage.min_col, @cage.max_col)
     column = player_turn_input(@cage.min_col, @cage.max_col)
     cage.update(@current_player.color, column)
     cage.display
-    switch_current_player
   end
 
   def switch_current_player
@@ -68,15 +70,12 @@ class Game
   end
 
   def game_over?
-    cage.is_full? || cage.has_winner?
+    cage.full? || cage.winner?(current_player)
   end
 
-  def conclusion
-    if cage.is_full?
-      puts display_cage_full_message
-      print_spacer2
-    elsif cage.has_winner?
-    end
+  def conclusion(conclusion)
+    conclusion == 'board_full' ? print_cage_full_message : print_winner_message(conclusion.name, conclusion.color)
+    print_spacer2
     sleep(3)
   end
 
