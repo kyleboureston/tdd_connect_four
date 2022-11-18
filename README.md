@@ -27,7 +27,7 @@ This was the second-to-last project on The Odin Project's Ruby course. But on to
 
 My two main objectives for this project were:
 1. **TDD.** I developed this game using TDD and the testing framework rspec. All tests can be found under the /spec folder. I found Sandi Metz's talk, "The Magic Tricks of Testing" extremely helpful. Specifically, I appreciated her simple breakdown of query vs command messages, and what to test for each of those message types. Here is a link to that point in her talk: https://youtu.be/URSWYvyc42M?t=1669
-2. **Github.** I used (really used) Github for the first time! At first, I found it slowed me down... but once I learned VS Code's interface for selective commiting and pushing, it became really quick and natural.
+2. **Github.** I used (really used) Github for the first time. At first, I found it slowed me down... but once I learned VS Code's interface and its ability to selectively commit and push files, it became really quick / natural.
 
 ## Things I learned / enjoyed
 
