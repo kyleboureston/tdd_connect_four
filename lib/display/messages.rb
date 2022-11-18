@@ -10,12 +10,12 @@ module Display
       puts 'Connect Four is a two-player turn-based board game. Each turn, a player is allowed to drop one piece of their color onto the board. A player wins by getting four of their color piece in a row on the board.'
       print_spacer1
       puts 'Ready to play?'
-      sleep(3)
+      sleep(2)
     end
 
     def print_loading_game
       puts 'Loading game...'
-      sleep(4)
+      sleep(2)
     end
 
     def display_player_name_request(player_num)
