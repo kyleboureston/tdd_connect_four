@@ -24,8 +24,10 @@ class Game
   end
 
   def play
+    print_welcome
     create_players
     create_cage
+    print_loading_game
     cage.display
     @current_player = @player1
     play_turn until game_over?
@@ -38,7 +40,7 @@ class Game
   end
 
   def create_player(player_num)
-    clear_screen
+    print_spacer2
     puts display_player_name_request(player_num)
     player_name = player_name_input.capitalize
 
@@ -50,10 +52,11 @@ class Game
   end
 
   def create_cage
-    clear_screen
+    print_spacer2
     puts display_cage_size_request
     cage_size = cage_size_input.to_i
     @cage = Cage.new((cage_size))
+    print_spacer1
   end
 
   def play_turn
