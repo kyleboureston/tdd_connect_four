@@ -7,7 +7,7 @@ Connect Four is a two-player turn-based board game. Each turn, a player is allow
 This project was developed using Test Driven Development (TDD).
 
 ## Play Here
-[![Run on Repl.it](https://repl.it/badge/github/kybow/tddconnectfour)](https://replit.com/@kybow/tddconnectfour)
+[![Run on Repl.it](https://repl.it/badge/github/kybow/connectfour)](https://replit.com/@kybow/connectfour)
 
 
 ## Technologies used
