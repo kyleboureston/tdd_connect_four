@@ -75,7 +75,7 @@ describe Cage do
     end
   end
 
-  player_name = 'Mr Player'
+  player_name = 'starlord'
   player_color = 'red'
   subject(:dummy_player) { Player.new(player_name, player_color) }
 

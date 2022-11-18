@@ -68,7 +68,7 @@ describe Game do
         game.player1 = original_player
         game.player2 = next_player
         game.current_player = original_player
-        original_current_player = game.current_player
+        game.current_player
         # Act
         current_player = game.switch_current_player
         # Assert
