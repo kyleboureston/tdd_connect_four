@@ -71,7 +71,7 @@ class Cage
       break if count == 4
 
       row.each do |cell_color|
-        cell_color == player_color ? count += 1 : count = 1
+        cell_color == player_color ? count += 1 : count = 0
         break if count == 4
       end
     end
