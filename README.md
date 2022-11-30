@@ -9,7 +9,7 @@ This project was developed using Test Driven Development (TDD).
 ## Play Here
 To play this game:
  1. First click the replit button below
- 2. Once on replit.com, click the green 'Run' button 
+ 2. Once on replit.com, click the play button in the center of the screen
  
 [![Run on Repl.it](https://repl.it/badge/github/kybow/connectfour)](https://replit.com/@kybow/connectfour)
 
